@@ -1,0 +1,1977 @@
+[00:00:02.975] Server  LOG     ✓ Ready in 2.2s
+[00:00:18.025] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:14:40.937] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:15:54.447] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:18:59.872] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.879] Server  ERROR   ⨯ ./admin_react/app/page.tsx:5:34
+Module not found: Can't resolve '../components/AdminPanel'
+  3 | import dynamic from "next/dynamic";
+  4 |
+> 5 | const AdminPanel = dynamic(() => import("../components/AdminPanel"), {
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |   ssr: false,
+  7 | });
+  8 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.882] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.882] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.884] Server  ERROR   ⨯ ./admin_react/app/page.tsx:5:34
+Module not found: Can't resolve '../components/AdminPanel'
+  3 | import dynamic from "next/dynamic";
+  4 |
+> 5 | const AdminPanel = dynamic(() => import("../components/AdminPanel"), {
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |   ssr: false,
+  7 | });
+  8 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.885] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.885] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.886] Server  ERROR   ⨯ ./admin_react/app/page.tsx:5:34
+Module not found: Can't resolve '../components/AdminPanel'
+  3 | import dynamic from "next/dynamic";
+  4 |
+> 5 | const AdminPanel = dynamic(() => import("../components/AdminPanel"), {
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |   ssr: false,
+  7 | });
+  8 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.886] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.887] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.887] Server  ERROR   ⨯ ./admin_react/app/page.tsx:5:34
+Module not found: Can't resolve '../components/AdminPanel'
+  3 | import dynamic from "next/dynamic";
+  4 |
+> 5 | const AdminPanel = dynamic(() => import("../components/AdminPanel"), {
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |   ssr: false,
+  7 | });
+  8 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.888] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.888] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.888] Server  ERROR   ⨯ ./admin_react/app/page.tsx:5:34
+Module not found: Can't resolve '../components/AdminPanel'
+  3 | import dynamic from "next/dynamic";
+  4 |
+> 5 | const AdminPanel = dynamic(() => import("../components/AdminPanel"), {
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |   ssr: false,
+  7 | });
+  8 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.889] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.889] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.890] Server  ERROR   ⨯ ./admin_react/app/page.tsx:5:34
+Module not found: Can't resolve '../components/AdminPanel'
+  3 | import dynamic from "next/dynamic";
+  4 |
+> 5 | const AdminPanel = dynamic(() => import("../components/AdminPanel"), {
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |   ssr: false,
+  7 | });
+  8 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.891] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.891] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.892] Server  ERROR   ⨯ ./admin_react/app/page.tsx:5:34
+Module not found: Can't resolve '../components/AdminPanel'
+  3 | import dynamic from "next/dynamic";
+  4 |
+> 5 | const AdminPanel = dynamic(() => import("../components/AdminPanel"), {
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |   ssr: false,
+  7 | });
+  8 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.893] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.894] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.895] Server  ERROR   ⨯ ./admin_react/app/page.tsx:5:34
+Module not found: Can't resolve '../components/AdminPanel'
+  3 | import dynamic from "next/dynamic";
+  4 |
+> 5 | const AdminPanel = dynamic(() => import("../components/AdminPanel"), {
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |   ssr: false,
+  7 | });
+  8 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.896] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.896] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.897] Server  ERROR   ⨯ ./admin_react/app/page.tsx:5:34
+Module not found: Can't resolve '../components/AdminPanel'
+  3 | import dynamic from "next/dynamic";
+  4 |
+> 5 | const AdminPanel = dynamic(() => import("../components/AdminPanel"), {
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |   ssr: false,
+  7 | });
+  8 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.897] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.897] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.898] Server  ERROR   ⨯ ./admin_react/app/page.tsx:5:34
+Module not found: Can't resolve '../components/AdminPanel'
+  3 | import dynamic from "next/dynamic";
+  4 |
+> 5 | const AdminPanel = dynamic(() => import("../components/AdminPanel"), {
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |   ssr: false,
+  7 | });
+  8 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.899] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.899] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.900] Server  ERROR   ⨯ ./admin_react/app/page.tsx:5:34
+Module not found: Can't resolve '../components/AdminPanel'
+  3 | import dynamic from "next/dynamic";
+  4 |
+> 5 | const AdminPanel = dynamic(() => import("../components/AdminPanel"), {
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |   ssr: false,
+  7 | });
+  8 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.901] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.901] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.901] Server  ERROR   ⨯ ./admin_react/app/page.tsx:5:34
+Module not found: Can't resolve '../components/AdminPanel'
+  3 | import dynamic from "next/dynamic";
+  4 |
+> 5 | const AdminPanel = dynamic(() => import("../components/AdminPanel"), {
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |   ssr: false,
+  7 | });
+  8 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.902] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.902] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.902] Server  ERROR   ⨯ ./admin_react/app/page.tsx:5:34
+Module not found: Can't resolve '../components/AdminPanel'
+  3 | import dynamic from "next/dynamic";
+  4 |
+> 5 | const AdminPanel = dynamic(() => import("../components/AdminPanel"), {
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |   ssr: false,
+  7 | });
+  8 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.903] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.903] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.905] Server  ERROR   ⨯ ./admin_react/app/page.tsx:5:34
+Module not found: Can't resolve '../components/AdminPanel'
+  3 | import dynamic from "next/dynamic";
+  4 |
+> 5 | const AdminPanel = dynamic(() => import("../components/AdminPanel"), {
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |   ssr: false,
+  7 | });
+  8 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.905] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.906] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.906] Server  ERROR   ⨯ ./admin_react/app/page.tsx:5:34
+Module not found: Can't resolve '../components/AdminPanel'
+  3 | import dynamic from "next/dynamic";
+  4 |
+> 5 | const AdminPanel = dynamic(() => import("../components/AdminPanel"), {
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |   ssr: false,
+  7 | });
+  8 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.907] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.908] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.908] Server  ERROR   ⨯ ./admin_react/app/page.tsx:5:34
+Module not found: Can't resolve '../components/AdminPanel'
+  3 | import dynamic from "next/dynamic";
+  4 |
+> 5 | const AdminPanel = dynamic(() => import("../components/AdminPanel"), {
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |   ssr: false,
+  7 | });
+  8 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.910] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.911] Server  ERROR   ⨯ ./admin_react/app/page.tsx
+Module not found: Can't resolve '../components/AdminPanel'
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.912] Server  ERROR   ⨯ ./admin_react/app/page.tsx:5:34
+Module not found: Can't resolve '../components/AdminPanel'
+  3 | import dynamic from "next/dynamic";
+  4 |
+> 5 | const AdminPanel = dynamic(() => import("../components/AdminPanel"), {
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |   ssr: false,
+  7 | });
+  8 |
+
+
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:18:59.914] Server  LOG     ✓ Compiled in 851ms
+[01:19:00.546] Browser ERROR   ./admin_react/app/page.tsx:5:34
+Module not found: Can't resolve '../components/AdminPanel'
+  3 | import dynamic from "next/dynamic";
+  4 |
+> 5 | const AdminPanel = dynamic(() => import("../components/AdminPanel"), {
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |   ssr: false,
+  7 | });
+  8 |
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[01:19:00.548] Browser ERROR   ./admin_react/app/page.tsx:5:34
+Module not found: Can't resolve '../components/AdminPanel'
+  3 | import dynamic from "next/dynamic";
+  4 |
+> 5 | const AdminPanel = dynamic(() => import("../components/AdminPanel"), {
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |   ssr: false,
+  7 | });
+  8 |
+
+Import traces:
+  Client Component Browser:
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./admin_react/app/page.tsx [Client Component SSR]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[01:22:21.523] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.532] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.542] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.550] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.556] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.561] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.564] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.567] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.571] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.574] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.577] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.580] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.584] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.586] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.591] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.593] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.596] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.599] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.602] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.606] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.609] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.612] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.614] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.617] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.623] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.627] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.632] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.637] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.641] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.645] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.648] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.652] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.655] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.658] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.666] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.669] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.676] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.682] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.686] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.691] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.696] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.699] Server  ERROR   ⨯ ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[01:22:21.704] Server  LOG     ✓ Compiled in 647ms
+[01:22:22.555] Browser ERROR   ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[01:22:22.556] Browser ERROR   ./admin_react/components/AdminPanel.tsx:41:1
+Module not found: Can't resolve '../lib/i18nProvider'
+  39 | import { authProvider } from "../lib/authProvider";
+  40 | import { dataProvider } from "../lib/dataProvider";
+> 41 | import { i18nProvider } from "../lib/i18nProvider";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  42 |
+  43 | const TRANSLIT_MAP: Record<string, string> = {
+  44 |   а: "a",
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+[01:23:23.667] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:23:23.691] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:24:15.161] Server  LOG     ✓ Compiled in 17ms
+[01:25:14.037] Server  LOG     ✓ Compiled in 20ms
+[01:27:17.123] Server  LOG     ✓ Compiled in 18ms
+[01:27:23.852] Server  LOG     ✓ Compiled in 27ms
+[01:36:03.974] Server  LOG     ✓ Compiled in 34ms
+[01:36:04.565] Browser ERROR   ./admin_react/lib/i18nProvider.ts:7:3
+Parsing ecmascript source code failed
+   5 | const messages: Record<string, string> = {
+   6 |   ""
+>  7 |   "ra.action.add_filter": "Добавить фильтр",
+     |   ^^^^^^^^^^^^^^^^^^^^^^
+   8 |   "ra.action.cancel": "Отмена",
+   9 |   "ra.action.clear_input_value": "Очистить",
+  10 |   "ra.action.clone": "Клонировать",
+
+Unexpected token `string literal`. Expected identifier
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/lib/i18nProvider.ts [Client Component Browser]
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+[01:36:04.565] Browser ERROR   ./admin_react/lib/i18nProvider.ts:7:3
+Parsing ecmascript source code failed
+   5 | const messages: Record<string, string> = {
+   6 |   ""
+>  7 |   "ra.action.add_filter": "Добавить фильтр",
+     |   ^^^^^^^^^^^^^^^^^^^^^^
+   8 |   "ra.action.cancel": "Отмена",
+   9 |   "ra.action.clear_input_value": "Очистить",
+  10 |   "ra.action.clone": "Клонировать",
+
+Unexpected token `string literal`. Expected identifier
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/lib/i18nProvider.ts [Client Component Browser]
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+[01:36:05.550] Browser ERROR   ./admin_react/lib/i18nProvider.ts:7:3
+Parsing ecmascript source code failed
+   5 | const messages: Record<string, string> = {
+   6 |   "ra.page.dashboard"
+>  7 |   "ra.action.add_filter": "Добавить фильтр",
+     |   ^^^^^^^^^^^^^^^^^^^^^^
+   8 |   "ra.action.cancel": "Отмена",
+   9 |   "ra.action.clear_input_value": "Очистить",
+  10 |   "ra.action.clone": "Клонировать",
+
+Unexpected token `string literal`. Expected identifier
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/lib/i18nProvider.ts [Client Component Browser]
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]
+[01:36:05.551] Browser ERROR   ./admin_react/lib/i18nProvider.ts:7:3
+Parsing ecmascript source code failed
+   5 | const messages: Record<string, string> = {
+   6 |   "ra.page.dashboard"
+>  7 |   "ra.action.add_filter": "Добавить фильтр",
+     |   ^^^^^^^^^^^^^^^^^^^^^^
+   8 |   "ra.action.cancel": "Отмена",
+   9 |   "ra.action.clear_input_value": "Очистить",
+  10 |   "ra.action.clone": "Клонировать",
+
+Unexpected token `string literal`. Expected identifier
+
+Import trace:
+  Client Component Browser:
+    ./admin_react/lib/i18nProvider.ts [Client Component Browser]
+    ./admin_react/components/AdminPanel.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Client Component Browser]
+    ./admin_react/app/page.tsx [Server Component]

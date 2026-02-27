@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 18, "column": 0}, "map": {"version":3,"sources":["file:///C:/shop_r/react_shop/admin_react/app/page.tsx"],"sourcesContent":["import dynamic from \"next/dynamic\";\n\nconst AdminPanel = dynamic(() => import(\"../components/AdminPanel\"), {\n  ssr: false,\n});\n\nexport default function Home() {\n  return <AdminPanel />;\n}\n"],"names":[],"mappings":";;;;;AAAA;;;;AAEA,MAAM,aAAa,IAAA,yLAAO,EAAC;;;;;;IACzB,KAAK;;AAGQ,SAAS;IACtB,qBAAO,6PAAC;;;;;AACV"}}]
+}

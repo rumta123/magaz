@@ -1,0 +1,13 @@
+{
+  "name": "react_shop-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm --prefix backend_nest run start:dev\" \"npm --prefix next_commerce run dev\" \"npm --prefix admin_react run dev\"",
+    "build": "npm --prefix backend_nest run build && npm --prefix next_commerce run build && npm --prefix admin_react run build",
+    "start": "concurrently \"npm --prefix backend_nest run start:prod\" \"npm --prefix next_commerce run start\" \"npm --prefix admin_react run preview\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
