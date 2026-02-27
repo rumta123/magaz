@@ -66,6 +66,43 @@ let ProductsService = class ProductsService {
             fs.mkdirSync(this.uploadDir, { recursive: true });
         }
     }
+    generateSlug(input) {
+        return input
+            .toLowerCase()
+            .trim()
+            .replace(/[‐-‒–—−]/g, "-")
+            .replace(/[^a-z0-9а-яё\s-]/g, "")
+            .replace(/[\s-]+/g, "-")
+            .replace(/^-+|-+$/g, "");
+    }
+    pickAndNormalizeSlug(dtoSlug, title) {
+        const raw = dtoSlug && dtoSlug.trim().length > 0 ? dtoSlug : title;
+        return this.generateSlug(raw);
+    }
+    async makeUniqueSlug(baseSlug, excludeId) {
+        const base = baseSlug && baseSlug.length > 0 ? baseSlug : "product";
+        let slug = base;
+        let i = 2;
+        const exists = async (s) => {
+            const found = await this.productRepo.findOne({
+                where: { slug: s },
+                select: { id: true },
+            });
+            if (!found)
+                return false;
+            if (excludeId !== undefined && Number(found.id) === Number(excludeId))
+                return false;
+            return true;
+        };
+        while (await exists(slug)) {
+            slug = `${base}-${i}`;
+            i += 1;
+            if (i > 500) {
+                throw new common_1.BadRequestException("Не удалось подобрать уникальный slug");
+            }
+        }
+        return slug;
+    }
     generateFilename(originalname) {
         const uniqueSuffix = crypto.randomBytes(16).toString("hex");
         const ext = path.extname(originalname);
@@ -122,11 +159,8 @@ let ProductsService = class ProductsService {
         if (!category) {
             throw new common_1.NotFoundException(`Категория с ID ${dto.categoryId} не найдена`);
         }
-        const slug = dto.slug || this.generateSlug(dto.title);
-        const existing = await this.productRepo.findOneBy({ slug });
-        if (existing) {
-            throw new common_1.BadRequestException("Товар с таким slug уже существует");
-        }
+        const baseSlug = this.pickAndNormalizeSlug(dto.slug, dto.title);
+        const slug = await this.makeUniqueSlug(baseSlug);
         let imageUrl = null;
         if (image) {
             imageUrl = await this.saveFile(image);
@@ -143,12 +177,10 @@ let ProductsService = class ProductsService {
     async findAll(query) {
         const { page = 1, limit = 20, search, categoryId, minPrice, maxPrice, inStock, } = query || {};
         const where = { isActive: true };
-        if (search) {
+        if (search)
             where.title = (0, typeorm_2.Like)(`%${search}%`);
-        }
-        if (categoryId) {
+        if (categoryId)
             where.categoryId = categoryId;
-        }
         if (minPrice !== undefined && maxPrice !== undefined) {
             where.price = (0, typeorm_2.Between)(minPrice, maxPrice);
         }
@@ -210,23 +242,20 @@ let ProductsService = class ProductsService {
         return product;
     }
     async findOneBySlug(slug) {
+        const normalized = this.generateSlug(slug);
         const product = await this.productRepo.findOne({
-            where: { slug, isActive: true },
+            where: { slug: normalized, isActive: true },
             relations: ["category", "images"],
         });
         if (!product) {
-            throw new common_1.NotFoundException(`Товар "${slug}" не найден`);
+            throw new common_1.NotFoundException(`Товар "${normalized}" не найден`);
         }
         return product;
     }
     async update(id, dto, image) {
-        if (dto.slug) {
-            const existing = await this.productRepo.findOne({
-                where: { slug: dto.slug },
-            });
-            if (existing && existing.id !== id) {
-                throw new common_1.BadRequestException("Товар с таким slug уже существует");
-            }
+        if (dto.slug && dto.slug.trim().length > 0) {
+            const baseSlug = this.generateSlug(dto.slug);
+            dto.slug = await this.makeUniqueSlug(baseSlug, Number(id));
         }
         if (dto.categoryId) {
             const category = await this.categoryRepo.findOneBy({
@@ -237,14 +266,14 @@ let ProductsService = class ProductsService {
             }
         }
         if (image) {
-            const product = await this.findOne(id);
+            const product = await this.findOne(Number(id));
             if (product.image) {
                 await this.deleteFile(product.image);
             }
             dto.image = await this.saveFile(image);
         }
-        await this.productRepo.update(id, dto);
-        return this.findOne(id);
+        await this.productRepo.update(Number(id), dto);
+        return this.findOne(Number(id));
     }
     async remove(id) {
         const product = await this.productRepo.findOneBy({ id });
@@ -264,13 +293,6 @@ let ProductsService = class ProductsService {
             relations: ["category"],
             order: { createdAt: "DESC" },
         });
-    }
-    generateSlug(title) {
-        return title
-            .toLowerCase()
-            .replace(/[^a-z0-9а-яё\s-]/g, "")
-            .replace(/[\s-]+/g, "-")
-            .replace(/^-+|-+$/g, "");
     }
     async updateStock(productId, quantity) {
         const product = await this.productRepo.findOneBy({ id: productId });

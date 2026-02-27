@@ -5,6 +5,8 @@ import { authStore } from "./authStore";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3333";
 
+// ==================== УТИЛИТЫ ====================
+
 const toNumber = (value: unknown): number | undefined => {
   if (value === null || value === undefined || value === "") return undefined;
   const n = Number(value);
@@ -14,48 +16,6 @@ const toNumber = (value: unknown): number | undefined => {
 const appendIfDefined = (form: FormData, key: string, value: unknown) => {
   if (value === null || value === undefined || value === "") return;
   form.append(key, String(value));
-};
-
-const buildProductFormData = (data: Record<string, unknown>): FormData => {
-  const form = new FormData();
-
-  appendIfDefined(form, "title", data.title);
-  appendIfDefined(form, "slug", data.slug);
-  appendIfDefined(form, "description", data.description);
-  appendIfDefined(form, "price", toNumber(data.price));
-  appendIfDefined(form, "discontPrice", toNumber(data.discontPrice));
-  appendIfDefined(form, "stock", toNumber(data.stock));
-  appendIfDefined(form, "categoryId", toNumber(data.categoryId));
-
-  const imageField = data.image as
-    | Array<{ rawFile?: File } | string>
-    | { rawFile?: File }
-    | File
-    | string
-    | undefined;
-  const firstImage = Array.isArray(imageField) ? imageField[0] : imageField;
-  const rawFile =
-    firstImage instanceof File
-      ? firstImage
-      : typeof firstImage === "object" && firstImage
-        ? (firstImage as { rawFile?: File }).rawFile
-        : undefined;
-  if (rawFile) {
-    form.append("image", rawFile);
-  }
-
-  return form;
-};
-
-const normalizeUser = (user: Record<string, unknown>) => {
-  const roles = Array.isArray(user.roles)
-    ? user.roles.map((r) => String(r))
-    : [];
-  return {
-    ...user,
-    roles,
-    rolesText: roles.join(", "),
-  };
 };
 
 const extractFiles = (value: unknown): File[] => {
@@ -70,6 +30,59 @@ const extractFiles = (value: unknown): File[] => {
     })
     .filter((file): file is File => file instanceof File);
 };
+
+const extractSingleFile = (value: unknown): File | undefined => {
+  if (!value) return undefined;
+  if (value instanceof File) return value;
+  if (Array.isArray(value) && value.length > 0) {
+    const first = value[0];
+    if (first instanceof File) return first;
+    if (first && typeof first === "object") {
+      return (first as { rawFile?: File }).rawFile;
+    }
+  }
+  if (typeof value === "object") {
+    return (value as { rawFile?: File }).rawFile;
+  }
+  return undefined;
+};
+
+const normalizeUploadedUrl = (raw: string): string | null => {
+  const value = raw.trim();
+  if (!value) return null;
+
+  try {
+    const parsed = new URL(value);
+    if (parsed.hostname === "localhost") {
+      parsed.hostname = "127.0.0.1";
+    }
+    return parsed.toString();
+  } catch {
+    if (value.startsWith("/")) {
+      try {
+        return new URL(value, API_URL).toString();
+      } catch {
+        return null;
+      }
+    }
+    return null;
+  }
+};
+
+const uploadSingleImage = async (file: File): Promise<string | null> => {
+  const form = new FormData();
+  form.append("image", file);
+
+  const result = (await http("/upload/single", {
+    method: "POST",
+    body: form,
+  })) as { url?: string };
+
+  if (!result.url) return null;
+  return normalizeUploadedUrl(result.url);
+};
+
+// ==================== ФОРМАТТЕРЫ URL ====================
 
 const toPublicProductImageUrl = (value: unknown): string | null => {
   if (typeof value !== "string") return null;
@@ -110,22 +123,42 @@ const toPublicCategoryImageUrl = (value: unknown): string | null => {
   }
 };
 
-const extractSingleFile = (value: unknown): File | undefined => {
-  if (!value) return undefined;
-  if (value instanceof File) return value;
-  if (Array.isArray(value) && value.length > 0) {
-    const first = value[0];
-    if (first instanceof File) return first;
-    if (first && typeof first === "object") {
-      return (first as { rawFile?: File }).rawFile;
-    }
-    return undefined;
+// ==================== ПОСТРОЕНИЕ FORM DATA ====================
+
+const buildProductFormData = (data: Record<string, unknown>): FormData => {
+  const form = new FormData();
+
+  appendIfDefined(form, "title", data.title);
+  appendIfDefined(form, "slug", data.slug);
+  appendIfDefined(form, "description", data.description);
+  appendIfDefined(form, "price", toNumber(data.price));
+  appendIfDefined(form, "discontPrice", toNumber(data.discontPrice));
+  appendIfDefined(form, "stock", toNumber(data.stock));
+  appendIfDefined(form, "categoryId", toNumber(data.categoryId));
+
+  const imageField = data.image as
+    | Array<{ rawFile?: File } | string>
+    | { rawFile?: File }
+    | File
+    | string
+    | undefined;
+
+  const firstImage = Array.isArray(imageField) ? imageField[0] : imageField;
+  const rawFile =
+    firstImage instanceof File
+      ? firstImage
+      : typeof firstImage === "object" && firstImage
+        ? (firstImage as { rawFile?: File }).rawFile
+        : undefined;
+
+  if (rawFile) {
+    form.append("image", rawFile);
   }
-  if (typeof value === "object") {
-    return (value as { rawFile?: File }).rawFile;
-  }
-  return undefined;
+
+  return form;
 };
+
+// ==================== ЗАГРУЗКА ИЗОБРАЖЕНИЙ ====================
 
 const resolveCategoryImageUrl = async (
   imageValue: unknown,
@@ -159,19 +192,6 @@ const resolveCategoryImageUrl = async (
   return undefined;
 };
 
-const uploadSingleImage = async (file: File): Promise<string | null> => {
-  const form = new FormData();
-  form.append("image", file);
-
-  const result = (await http("/upload/single", {
-    method: "POST",
-    body: form,
-  })) as { url?: string };
-
-  if (!result.url) return null;
-  return normalizeUploadedUrl(result.url);
-};
-
 const attachGalleryImages = async (productId: number, files: File[]) => {
   if (files.length === 0) return;
 
@@ -192,55 +212,45 @@ const attachGalleryImages = async (productId: number, files: File[]) => {
   }
 };
 
-const normalizeUploadedUrl = (raw: string): string | null => {
-  const value = raw.trim();
-  if (!value) return null;
+// ==================== НОРМАЛИЗАЦИЯ ДАННЫХ ====================
 
-  const toValidatorFriendlyUrl = (urlValue: string): string | null => {
-    try {
-      const parsed = new URL(urlValue);
-      if (parsed.hostname === "localhost") {
-        parsed.hostname = "127.0.0.1";
-      }
-      return parsed.toString();
-    } catch {
-      return null;
-    }
+const normalizeUser = (user: Record<string, unknown>) => {
+  const roles = Array.isArray(user.roles)
+    ? user.roles.map((r) => String(r))
+    : [];
+  return {
+    ...user,
+    roles,
+    rolesText: roles.join(", "),
   };
-
-  try {
-    return toValidatorFriendlyUrl(value);
-  } catch {
-    // continue with normalization
-  }
-
-  if (value.startsWith("//")) {
-    return toValidatorFriendlyUrl(`http:${value}`);
-  }
-
-  if (value.startsWith("/")) {
-    return toValidatorFriendlyUrl(new URL(value, API_URL).toString());
-  }
-
-  if (value.startsWith(":")) {
-    try {
-      const api = new URL(API_URL);
-      return toValidatorFriendlyUrl(
-        new URL(`${api.protocol}//${api.hostname}${value}`).toString(),
-      );
-    } catch {
-      return null;
-    }
-  }
-
-  if (value.startsWith("localhost:") || value.startsWith("127.0.0.1:")) {
-    return toValidatorFriendlyUrl(`http://${value}`);
-  }
-
-  return null;
 };
 
-const http = async (path: string, options: RequestInit = {}): Promise<unknown> => {
+const normalizeProduct = (data: Record<string, unknown>) => {
+  const imageUrl = toPublicProductImageUrl(data.image);
+  return {
+    ...data,
+    image: imageUrl ? [{ src: imageUrl, title: String(data.title ?? "") }] : [],
+    categoryId:
+      (data.categoryId as number | string | undefined) ??
+      (data.category as { id?: number | string } | undefined)?.id ??
+      undefined,
+  };
+};
+
+const normalizeCategory = (data: Record<string, unknown>) => {
+  const imageUrl = toPublicCategoryImageUrl(data.image);
+  return {
+    ...data,
+    image: imageUrl ? [{ src: imageUrl, title: String(data.title ?? "") }] : [],
+  };
+};
+
+// ==================== HTTP КЛИЕНТ ====================
+
+const http = async (
+  path: string,
+  options: RequestInit = {},
+): Promise<unknown> => {
   const token = authStore.getToken();
   const headers: Record<string, string> = {
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
@@ -291,234 +301,261 @@ const http = async (path: string, options: RequestInit = {}): Promise<unknown> =
   return response.json();
 };
 
+// ==================== DATA PROVIDER ====================
+
 const rawDataProvider = {
+  // ===== GET LIST =====
   getList: async (
     resource: string,
     params: { pagination?: { page?: number; perPage?: number } },
   ) => {
-    if (resource === "products") {
-      const page = params.pagination?.page ?? 1;
-      const perPage = params.pagination?.perPage ?? 10;
-      const all = (await http("/products/all")) as Record<string, unknown>[];
-      const start = (page - 1) * perPage;
-      const end = start + perPage;
+    const page = params.pagination?.page ?? 1;
+    const perPage = params.pagination?.perPage ?? 10;
+    const start = (page - 1) * perPage;
+    const end = start + perPage;
 
-      return {
-        data: all.slice(start, end),
-        total: all.length,
-      };
+    switch (resource) {
+      case "products": {
+        const all = (await http("/products/all")) as Record<string, unknown>[];
+        return {
+          data: all.slice(start, end),
+          total: all.length,
+        };
+      }
+
+      case "categories": {
+        const data = (await http("/categories/all")) as Record<
+          string,
+          unknown
+        >[];
+        return {
+          data,
+          total: data.length,
+        };
+      }
+
+      case "users": {
+        const data = (await http("/users")) as Record<string, unknown>[];
+        const mapped = data.map(normalizeUser);
+        return {
+          data: mapped.slice(start, end),
+          total: mapped.length,
+        };
+      }
+
+      case "orders": {
+        const data = (await http("/orders")) as Record<string, unknown>[];
+        return {
+          data: data.slice(start, end),
+          total: data.length,
+        };
+      }
+
+      default:
+        throw new Error(`Unsupported resource: ${resource}`);
     }
-
-    if (resource === "categories") {
-      const data = (await http("/categories/all")) as Record<string, unknown>[];
-      return {
-        data,
-        total: data.length,
-      };
-    }
-
-    if (resource === "users") {
-      const data = (await http("/users")) as Record<string, unknown>[];
-      const mapped = data.map(normalizeUser);
-      const page = params.pagination?.page ?? 1;
-      const perPage = params.pagination?.perPage ?? 10;
-      const start = (page - 1) * perPage;
-      const end = start + perPage;
-      return {
-        data: mapped.slice(start, end),
-        total: mapped.length,
-      };
-    }
-
-    if (resource === "orders") {
-      const data = (await http("/orders")) as Record<string, unknown>[];
-      const page = params.pagination?.page ?? 1;
-      const perPage = params.pagination?.perPage ?? 10;
-      const start = (page - 1) * perPage;
-      const end = start + perPage;
-      return {
-        data: data.slice(start, end),
-        total: data.length,
-      };
-    }
-
-    throw new Error(`Unsupported resource: ${resource}`);
   },
 
+  // ===== GET ONE =====
   getOne: async (resource: string, params: { id: number | string }) => {
-    if (resource === "products") {
-      const data = (await http(`/products/${params.id}`)) as Record<
-        string,
-        unknown
-      >;
-      const imageUrl = toPublicProductImageUrl(data.image);
-      return {
-        data: {
-          ...data,
-          image: imageUrl
-            ? [{ src: imageUrl, title: String(data.title ?? "") }]
-            : [],
-          categoryId:
-            (data.categoryId as number | string | undefined) ??
-            ((data.category as { id?: number | string } | undefined)?.id ??
-              undefined),
-        },
-      };
-    }
+    switch (resource) {
+      case "products": {
+        const data = (await http(`/products/${params.id}`)) as Record<
+          string,
+          unknown
+        >;
+        return { data: normalizeProduct(data) };
+      }
 
-    if (resource === "categories") {
-      const data = (await http(`/categories/${params.id}`)) as {
-        category?: Record<string, unknown>;
-      };
-      const category = (data.category ?? data) as Record<string, unknown>;
-      const imageUrl = toPublicCategoryImageUrl(category.image);
-      return {
-        data: {
-          ...category,
-          image: imageUrl ? [{ src: imageUrl, title: String(category.title ?? "") }] : [],
-        },
-      };
-    }
+      case "categories": {
+        const data = (await http(`/categories/${params.id}`)) as {
+          category?: Record<string, unknown>;
+        };
+        const category = (data.category ?? data) as Record<string, unknown>;
+        return { data: normalizeCategory(category) };
+      }
 
-    if (resource === "users") {
-      const data = (await http(`/users/${params.id}`)) as Record<string, unknown>;
-      return { data: normalizeUser(data) };
-    }
+      case "users": {
+        const data = (await http(`/users/${params.id}`)) as Record<
+          string,
+          unknown
+        >;
+        return { data: normalizeUser(data) };
+      }
 
-    if (resource === "orders") {
-      const data = (await http(`/orders/${params.id}`)) as Record<string, unknown>;
-      return { data };
-    }
+      case "orders": {
+        const data = (await http(`/orders/${params.id}`)) as Record<
+          string,
+          unknown
+        >;
+        return { data };
+      }
 
-    throw new Error(`Unsupported resource: ${resource}`);
+      default:
+        throw new Error(`Unsupported resource: ${resource}`);
+    }
   },
 
+  // ===== GET MANY =====
   getMany: async (
     resource: string,
     params: { ids?: Array<number | string> },
   ) => {
-    if (resource === "categories") {
-      const data = (await http("/categories/all")) as Array<Record<string, unknown>>;
-      const ids = new Set((params.ids ?? []).map((id) => Number(id)));
-      return {
-        data: data.filter((item) => ids.has(Number(item.id))),
-      };
+    const ids = new Set((params.ids ?? []).map((id) => Number(id)));
+
+    switch (resource) {
+      case "categories": {
+        const data = (await http("/categories/all")) as Array<
+          Record<string, unknown>
+        >;
+        return {
+          data: data.filter((item) => ids.has(Number(item.id))),
+        };
+      }
+
+      case "users": {
+        const data = (await http("/users")) as Array<Record<string, unknown>>;
+        return {
+          data: data
+            .filter((item) => ids.has(Number(item.id)))
+            .map(normalizeUser),
+        };
+      }
+
+      default:
+        return { data: [] };
     }
-    if (resource === "users") {
-      const data = (await http("/users")) as Array<Record<string, unknown>>;
-      const ids = new Set((params.ids ?? []).map((id) => Number(id)));
-      return {
-        data: data.filter((item) => ids.has(Number(item.id))).map(normalizeUser),
-      };
-    }
-    return { data: [] };
   },
 
   getManyReference: async () => ({ data: [], total: 0 }),
 
+  // ===== CREATE =====
+  // ===== CREATE =====
   create: async (
     resource: string,
     params: { data: Record<string, unknown> },
   ) => {
-    if (resource === "products") {
-      const product = (await http("/products", {
-        method: "POST",
-        body: buildProductFormData(params.data),
-      })) as Record<string, unknown>;
-      const galleryFiles = extractFiles(params.data.gallery);
-      const productId = Number(product.id);
-      await attachGalleryImages(productId, galleryFiles);
-      return { data: product };
-    }
+    // Для не-product ресурсов
+    if (resource !== "products") {
+      switch (resource) {
+        case "categories": {
+          const imageUrl = await resolveCategoryImageUrl(params.data.image);
+          const payload: Record<string, unknown> = { ...params.data };
+          delete payload.image;
+          if (imageUrl) {
+            payload.image = imageUrl;
+          }
 
-    if (resource === "categories") {
-      const imageUrl = await resolveCategoryImageUrl(params.data.image);
-      const payload: Record<string, unknown> = { ...params.data };
-      delete payload.image;
-      if (imageUrl) {
-        payload.image = imageUrl;
+          const data = (await http("/categories", {
+            method: "POST",
+            body: JSON.stringify(payload),
+          })) as Record<string, unknown>;
+
+          return { data };
+        }
+
+        case "users": {
+          const data = (await http("/users", {
+            method: "POST",
+            body: JSON.stringify(params.data),
+          })) as Record<string, unknown>;
+
+          return { data: normalizeUser(data) };
+        }
+
+        default:
+          throw new Error(`Unsupported resource: ${resource}`);
       }
-      const data = (await http("/categories", {
-        method: "POST",
-        body: JSON.stringify(payload),
-      })) as Record<string, unknown>;
-      return { data };
     }
 
-    if (resource === "users") {
-      const data = (await http("/users", {
-        method: "POST",
-        body: JSON.stringify(params.data),
-      })) as Record<string, unknown>;
-      return { data: normalizeUser(data) };
-    }
+    // ✅ products: без ретраев и без Date.now()
+    const product = (await http("/products", {
+      method: "POST",
+      body: buildProductFormData(params.data),
+    })) as Record<string, unknown>;
 
-    throw new Error(`Unsupported resource: ${resource}`);
+    const galleryFiles = extractFiles(params.data.gallery);
+    const productId = Number(product.id);
+    await attachGalleryImages(productId, galleryFiles);
+
+    return { data: product };
   },
 
+  // ===== UPDATE =====
   update: async (
     resource: string,
     params: { id: number | string; data: Record<string, unknown> },
   ) => {
-    if (resource === "products") {
-      const product = (await http(`/products/${params.id}`, {
-        method: "PATCH",
-        body: buildProductFormData(params.data),
-      })) as Record<string, unknown>;
-      const galleryFiles = extractFiles(params.data.gallery);
-      const productId = Number(params.id);
-      await attachGalleryImages(productId, galleryFiles);
-      return { data: product };
+    // Для не-product ресурсов
+    if (resource !== "products") {
+      switch (resource) {
+        case "categories": {
+          const imageUrl = await resolveCategoryImageUrl(params.data.image);
+          const payload: Record<string, unknown> = { ...params.data };
+          delete payload.image;
+          if (imageUrl) {
+            payload.image = imageUrl;
+          }
+
+          const data = (await http(`/categories/${params.id}`, {
+            method: "PATCH",
+            body: JSON.stringify(payload),
+          })) as Record<string, unknown>;
+
+          return { data };
+        }
+
+        case "users": {
+          const payload = { ...params.data };
+          if (!payload.password) {
+            delete payload.password;
+          }
+
+          const data = (await http(`/users/${params.id}`, {
+            method: "PATCH",
+            body: JSON.stringify(payload),
+          })) as Record<string, unknown>;
+
+          return { data: normalizeUser(data) };
+        }
+
+        case "orders": {
+          const nextStatus = String(params.data.status ?? "");
+
+          if (nextStatus === "processing") {
+            const data = (await http(`/orders/${params.id}/confirm`, {
+              method: "PATCH",
+            })) as Record<string, unknown>;
+            return { data };
+          }
+
+          if (nextStatus === "cancelled") {
+            const data = (await http(`/orders/${params.id}/cancel`, {
+              method: "PATCH",
+            })) as Record<string, unknown>;
+            return { data };
+          }
+
+          throw new Error("Unsupported order status transition");
+        }
+
+        default:
+          throw new Error(`Unsupported resource: ${resource}`);
+      }
     }
 
-    if (resource === "categories") {
-      const imageUrl = await resolveCategoryImageUrl(params.data.image);
-      const payload: Record<string, unknown> = { ...params.data };
-      delete payload.image;
-      if (imageUrl) {
-        payload.image = imageUrl;
-      }
-      const data = (await http(`/categories/${params.id}`, {
-        method: "PATCH",
-        body: JSON.stringify(payload),
-      })) as Record<string, unknown>;
-      return { data };
-    }
+    // ✅ products: без проверки slug и без Date.now()
+    const product = (await http(`/products/${params.id}`, {
+      method: "PATCH",
+      body: buildProductFormData(params.data),
+    })) as Record<string, unknown>;
 
-    if (resource === "users") {
-      const payload = { ...params.data };
-      if (!payload.password) {
-        delete payload.password;
-      }
-      const data = (await http(`/users/${params.id}`, {
-        method: "PATCH",
-        body: JSON.stringify(payload),
-      })) as Record<string, unknown>;
-      return { data: normalizeUser(data) };
-    }
+    const galleryFiles = extractFiles(params.data.gallery);
+    await attachGalleryImages(Number(params.id), galleryFiles);
 
-    if (resource === "orders") {
-      const nextStatus = String(params.data.status ?? "");
-      if (nextStatus === "processing") {
-        const data = (await http(`/orders/${params.id}/confirm`, {
-          method: "PATCH",
-        })) as Record<string, unknown>;
-        return { data };
-      }
-      if (nextStatus === "cancelled") {
-        const data = (await http(`/orders/${params.id}/cancel`, {
-          method: "PATCH",
-        })) as Record<string, unknown>;
-        return { data };
-      }
-      throw new Error("Unsupported order status transition");
-    }
-
-    throw new Error(`Unsupported resource: ${resource}`);
+    return { data: product };
   },
-
-  updateMany: async () => ({ data: [] }),
-
+  // ===== DELETE =====
   delete: async (
     resource: string,
     params: {
@@ -526,22 +563,17 @@ const rawDataProvider = {
       previousData?: Record<string, unknown>;
     },
   ) => {
-    if (resource === "products") {
-      await http(`/products/${params.id}`, { method: "DELETE" });
-      return { data: params.previousData ?? { id: params.id } };
-    }
+    switch (resource) {
+      case "products":
+      case "categories":
+      case "users": {
+        await http(`/${resource}/${params.id}`, { method: "DELETE" });
+        return { data: params.previousData ?? { id: params.id } };
+      }
 
-    if (resource === "categories") {
-      await http(`/categories/${params.id}`, { method: "DELETE" });
-      return { data: params.previousData ?? { id: params.id } };
+      default:
+        throw new Error(`Unsupported resource: ${resource}`);
     }
-
-    if (resource === "users") {
-      await http(`/users/${params.id}`, { method: "DELETE" });
-      return { data: params.previousData ?? { id: params.id } };
-    }
-
-    throw new Error(`Unsupported resource: ${resource}`);
   },
 
   deleteMany: async () => ({ data: [] }),

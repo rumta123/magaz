@@ -160,5 +160,3 @@ export class ProductsController {
     return this.productsService.updateStock(id, quantity);
   }
 }
-
-

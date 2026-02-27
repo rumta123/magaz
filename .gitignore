@@ -1,37 +1,63 @@
 # dependencies
 node_modules/
-backend/parser/
-backend/.pnp
-backend/.pnp.js
+**/node_modules/
+**/backend/parser/
+**/.pnp
+**/.pnp.js
 
 # testing
-backend/coverage/
+**/coverage/
 
 # production
-backend/build/
+**/build/
+**/dist/
 
 # misc
-backend/.DS_Store
-backend/.env*
+.DS_Store
+**/.DS_Store
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
 
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
-# dependencies
-shop/node_modules/
-shop/.pnp
-shop/.pnp.js
+# Logs
+logs/
+*.log
 
-# testing
-shop/coverage/
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
 
-# production
-shop/build/
+# backend specific
+backend_nest/dist/
+backend_nest/parser/
+backend_nest/*.log
+backend_nest/node_modules/
 
-# misc
-shop/.DS_Store
-shop/.env*
-shop/npm-debug.log*
-shop/yarn-debug.log*
-shop/yarn-error.log*
+# admin react specific
+admin_react/build/
+admin_react/.next/
+admin_react/node_modules/
+admin_react/dist/
+
+# next commerce specific
+next_commerce/.next/
+next_commerce/out/
+next_commerce/node_modules/
+next_commerce/dist/

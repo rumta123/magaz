@@ -25,6 +25,7 @@ import { OrdersModule } from "./orders/orders.module";
       database: "react_shop_db",
       autoLoadEntities: true,
       synchronize: true,
+      migrations: ["src/migrations/*.ts"],
     }),
     UsersModule,
     AuthModule,

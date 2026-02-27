@@ -20,7 +20,7 @@ export class Product {
   @Column({ length: 255 })
   title: string;
 
-  @Column({ length: 255, unique: true })
+  @Column({ length: 255 })
   slug: string; // ✅ Для SEO URL
 
   @Column({ type: "decimal", precision: 10, scale: 2 })
@@ -83,6 +83,7 @@ export class Product {
   generateSlug(): string {
     return this.title
       .toLowerCase()
+      .replace(/[‐-‒–—−]/g, "-") // ← все варианты тире/минуса в "-"
       .replace(/[^a-z0-9а-яё\s-]/g, "")
       .replace(/[\s-]+/g, "-")
       .replace(/^-+|-+$/g, "");

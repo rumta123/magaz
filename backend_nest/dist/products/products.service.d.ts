@@ -8,6 +8,9 @@ export declare class ProductsService {
     private readonly categoryRepo;
     private uploadDir;
     constructor(productRepo: Repository<Product>, categoryRepo: Repository<Category>);
+    private generateSlug;
+    private pickAndNormalizeSlug;
+    private makeUniqueSlug;
     private generateFilename;
     private saveFile;
     private deleteFile;
@@ -37,6 +40,5 @@ export declare class ProductsService {
         message: string;
     }>;
     findByCategory(categoryId: number): Promise<Product[]>;
-    private generateSlug;
     updateStock(productId: number, quantity: number): Promise<Product>;
 }

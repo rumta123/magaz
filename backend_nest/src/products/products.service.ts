@@ -32,25 +32,82 @@ export class ProductsService {
     @InjectRepository(Category)
     private readonly categoryRepo: Repository<Category>,
   ) {
-    // Настройка путей для загрузки
     this.uploadDir = path.join(process.cwd(), "uploads", "products");
 
-    // Создаём папку если нет
     if (!fs.existsSync(this.uploadDir)) {
       fs.mkdirSync(this.uploadDir, { recursive: true });
     }
   }
 
-  // 🔹 Генерация уникального имени файла
+  // ============================
+  // SLUG
+  // ============================
+  private generateSlug(input: string): string {
+    return input
+      .toLowerCase()
+      .trim()
+      .replace(/[‐-‒–—−]/g, "-") // все варианты тире/минуса -> обычный "-"
+      .replace(/[^a-z0-9а-яё\s-]/g, "") // убираем лишнее
+      .replace(/[\s-]+/g, "-") // пробелы/дефисы -> один дефис
+      .replace(/^-+|-+$/g, ""); // убрать дефисы по краям
+  }
+
+  private pickAndNormalizeSlug(
+    dtoSlug: string | undefined,
+    title: string,
+  ): string {
+    const raw = dtoSlug && dtoSlug.trim().length > 0 ? dtoSlug : title;
+    return this.generateSlug(raw);
+  }
+
+  /**
+   * Делает slug уникальным:
+   * super -> super-2 -> super-3 ...
+   */
+  private async makeUniqueSlug(
+    baseSlug: string,
+    excludeId?: number,
+  ): Promise<string> {
+    // если после нормализации пусто — даём дефолт
+    const base = baseSlug && baseSlug.length > 0 ? baseSlug : "product";
+
+    let slug = base;
+    let i = 2;
+
+    // проверка существования
+    const exists = async (s: string) => {
+      const found = await this.productRepo.findOne({
+        where: { slug: s },
+        select: { id: true },
+      });
+
+      if (!found) return false;
+      if (excludeId !== undefined && Number(found.id) === Number(excludeId))
+        return false;
+      return true;
+    };
+
+    while (await exists(slug)) {
+      slug = `${base}-${i}`;
+      i += 1;
+      if (i > 500) {
+        throw new BadRequestException("Не удалось подобрать уникальный slug");
+      }
+    }
+
+    return slug;
+  }
+
+  // ============================
+  // FILES
+  // ============================
   private generateFilename(originalname: string): string {
     const uniqueSuffix = crypto.randomBytes(16).toString("hex");
     const ext = path.extname(originalname);
     return `${uniqueSuffix}${ext}`;
   }
 
-  // 🔹 Загрузка файла на диск
   private async saveFile(file: Express.Multer.File): Promise<string> {
-    // Валидация типа
     const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/gif"];
     if (!allowedTypes.includes(file.mimetype)) {
       throw new BadRequestException(
@@ -58,7 +115,6 @@ export class ProductsService {
       );
     }
 
-    // Валидация размера (макс 5MB)
     if (file.size > 5 * 1024 * 1024) {
       throw new BadRequestException("Размер файла не должен превышать 5MB");
     }
@@ -70,7 +126,6 @@ export class ProductsService {
     return filename;
   }
 
-  // 🔹 Удаление файла
   private async deleteFile(url: string): Promise<void> {
     try {
       const filename = url.split("/").pop();
@@ -84,7 +139,9 @@ export class ProductsService {
     }
   }
 
-  // 🔹 Создать товар (только админ)
+  // ============================
+  // ADMIN LIST
+  // ============================
   async findAllForAdmin(): Promise<Product[]> {
     return this.productRepo.find({
       relations: ["category"],
@@ -104,6 +161,10 @@ export class ProductsService {
       order: { createdAt: "DESC" },
     });
   }
+
+  // ============================
+  // CREATE
+  // ============================
   async create(
     dto: CreateProductDto,
     image?: Express.Multer.File,
@@ -115,14 +176,13 @@ export class ProductsService {
       );
     }
 
-    const slug = dto.slug || this.generateSlug(dto.title);
+    // 1) нормализуем (из slug или title)
+    const baseSlug = this.pickAndNormalizeSlug(dto.slug, dto.title);
 
-    const existing = await this.productRepo.findOneBy({ slug });
-    if (existing) {
-      throw new BadRequestException("Товар с таким slug уже существует");
-    }
+    // 2) делаем уникальным (super -> super-2 ...)
+    const slug = await this.makeUniqueSlug(baseSlug);
 
-    // Загрузка изображения если есть
+    // загрузка картинки
     let imageUrl: string | null = null;
     if (image) {
       imageUrl = await this.saveFile(image);
@@ -139,7 +199,9 @@ export class ProductsService {
     return this.productRepo.save(product);
   }
 
-  // 🔹 Получить все товары с фильтрацией и пагинацией
+  // ============================
+  // LIST (PUBLIC)
+  // ============================
   async findAll(query?: {
     page?: number;
     limit?: number;
@@ -161,12 +223,9 @@ export class ProductsService {
 
     const where: FindOptionsWhere<Product> = { isActive: true };
 
-    if (search) {
-      where.title = Like(`%${search}%`);
-    }
-    if (categoryId) {
-      where.categoryId = categoryId;
-    }
+    if (search) where.title = Like(`%${search}%`);
+    if (categoryId) where.categoryId = categoryId;
+
     if (minPrice !== undefined && maxPrice !== undefined) {
       where.price = Between(minPrice, maxPrice);
     } else if (minPrice !== undefined) {
@@ -174,6 +233,7 @@ export class ProductsService {
     } else if (maxPrice !== undefined) {
       where.price = LessThanOrEqual(maxPrice);
     }
+
     if (inStock !== undefined) {
       where.stock = inStock ? MoreThan(0) : 0;
     }
@@ -209,7 +269,9 @@ export class ProductsService {
     };
   }
 
-  // 🔹 Получить товар по ID
+  // ============================
+  // GET ONE
+  // ============================
   async findOne(id: number): Promise<Product> {
     const product = await this.productRepo.findOne({
       where: { id, isActive: true },
@@ -232,33 +294,33 @@ export class ProductsService {
     return product;
   }
 
-  // 🔹 Получить товар по slug (для SEO)
   async findOneBySlug(slug: string): Promise<Product> {
+    const normalized = this.generateSlug(slug);
+
     const product = await this.productRepo.findOne({
-      where: { slug, isActive: true },
+      where: { slug: normalized, isActive: true },
       relations: ["category", "images"],
     });
 
     if (!product) {
-      throw new NotFoundException(`Товар "${slug}" не найден`);
+      throw new NotFoundException(`Товар "${normalized}" не найден`);
     }
 
     return product;
   }
 
-  // 🔹 Обновить товар (только админ)
+  // ============================
+  // UPDATE
+  // ============================
   async update(
     id: number,
     dto: UpdateProductDto,
     image?: Express.Multer.File,
   ): Promise<Product> {
-    if (dto.slug) {
-      const existing = await this.productRepo.findOne({
-        where: { slug: dto.slug },
-      });
-      if (existing && existing.id !== id) {
-        throw new BadRequestException("Товар с таким slug уже существует");
-      }
+    // если меняют slug — нормализуем и делаем уникальным (но НЕ на чужом id)
+    if (dto.slug && dto.slug.trim().length > 0) {
+      const baseSlug = this.generateSlug(dto.slug);
+      dto.slug = await this.makeUniqueSlug(baseSlug, Number(id));
     }
 
     if (dto.categoryId) {
@@ -272,29 +334,27 @@ export class ProductsService {
       }
     }
 
-    // Если загружено новое изображение — обновляем его
     if (image) {
-      const product = await this.findOne(id);
-      // Удаляем старое изображение
+      const product = await this.findOne(Number(id));
       if (product.image) {
         await this.deleteFile(product.image);
       }
-      // Загружаем новое
       dto.image = await this.saveFile(image);
     }
 
-    await this.productRepo.update(id, dto);
-    return this.findOne(id);
+    await this.productRepo.update(Number(id), dto);
+    return this.findOne(Number(id));
   }
 
-  // 🔹 Удалить товар (мягкое удаление через isActive)
+  // ============================
+  // REMOVE (SOFT)
+  // ============================
   async remove(id: number): Promise<{ message: string }> {
     const product = await this.productRepo.findOneBy({ id });
     if (!product) {
       throw new NotFoundException(`Товар с ID ${id} не найден`);
     }
 
-    // Удаляем изображение товара при удалении
     if (product.image) {
       await this.deleteFile(product.image);
     }
@@ -305,7 +365,6 @@ export class ProductsService {
     return { message: "Товар успешно удален" };
   }
 
-  // 🔹 Получить товары по категории
   async findByCategory(categoryId: number) {
     return this.productRepo.find({
       where: { categoryId, isActive: true },
@@ -314,16 +373,6 @@ export class ProductsService {
     });
   }
 
-  // 🔹 Утилита для генерации slug
-  private generateSlug(title: string): string {
-    return title
-      .toLowerCase()
-      .replace(/[^a-z0-9а-яё\s-]/g, "")
-      .replace(/[\s-]+/g, "-")
-      .replace(/^-+|-+$/g, "");
-  }
-
-  // 🔹 Обновить остатки товара
   async updateStock(productId: number, quantity: number): Promise<Product> {
     const product = await this.productRepo.findOneBy({ id: productId });
     if (!product) {
@@ -334,5 +383,3 @@ export class ProductsService {
     return this.productRepo.save(product);
   }
 }
-
-

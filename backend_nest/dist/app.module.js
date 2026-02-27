@@ -37,6 +37,7 @@ exports.AppModule = AppModule = __decorate([
                 database: "react_shop_db",
                 autoLoadEntities: true,
                 synchronize: true,
+                migrations: ["src/migrations/*.ts"],
             }),
             users_module_1.UsersModule,
             auth_module_1.AuthModule,

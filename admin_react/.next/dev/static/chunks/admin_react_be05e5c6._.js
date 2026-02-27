@@ -182,6 +182,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$admin_react$2f$lib$2f$authSt
 "use client";
 ;
 const API_URL = __TURBOPACK__imported__module__$5b$project$5d2f$admin_react$2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].env.NEXT_PUBLIC_API_URL ?? "http://localhost:3333";
+// ==================== УТИЛИТЫ ====================
 const toNumber = (value)=>{
     if (value === null || value === undefined || value === "") return undefined;
     const n = Number(value);
@@ -190,31 +191,6 @@ const toNumber = (value)=>{
 const appendIfDefined = (form, key, value)=>{
     if (value === null || value === undefined || value === "") return;
     form.append(key, String(value));
-};
-const buildProductFormData = (data)=>{
-    const form = new FormData();
-    appendIfDefined(form, "title", data.title);
-    appendIfDefined(form, "slug", data.slug);
-    appendIfDefined(form, "description", data.description);
-    appendIfDefined(form, "price", toNumber(data.price));
-    appendIfDefined(form, "discontPrice", toNumber(data.discontPrice));
-    appendIfDefined(form, "stock", toNumber(data.stock));
-    appendIfDefined(form, "categoryId", toNumber(data.categoryId));
-    const imageField = data.image;
-    const firstImage = Array.isArray(imageField) ? imageField[0] : imageField;
-    const rawFile = firstImage instanceof File ? firstImage : typeof firstImage === "object" && firstImage ? firstImage.rawFile : undefined;
-    if (rawFile) {
-        form.append("image", rawFile);
-    }
-    return form;
-};
-const normalizeUser = (user)=>{
-    const roles = Array.isArray(user.roles) ? user.roles.map((r)=>String(r)) : [];
-    return {
-        ...user,
-        roles,
-        rolesText: roles.join(", ")
-    };
 };
 const extractFiles = (value)=>{
     if (!Array.isArray(value)) return [];
@@ -226,6 +202,52 @@ const extractFiles = (value)=>{
         return undefined;
     }).filter((file)=>file instanceof File);
 };
+const extractSingleFile = (value)=>{
+    if (!value) return undefined;
+    if (value instanceof File) return value;
+    if (Array.isArray(value) && value.length > 0) {
+        const first = value[0];
+        if (first instanceof File) return first;
+        if (first && typeof first === "object") {
+            return first.rawFile;
+        }
+    }
+    if (typeof value === "object") {
+        return value.rawFile;
+    }
+    return undefined;
+};
+const normalizeUploadedUrl = (raw)=>{
+    const value = raw.trim();
+    if (!value) return null;
+    try {
+        const parsed = new URL(value);
+        if (parsed.hostname === "localhost") {
+            parsed.hostname = "127.0.0.1";
+        }
+        return parsed.toString();
+    } catch  {
+        if (value.startsWith("/")) {
+            try {
+                return new URL(value, API_URL).toString();
+            } catch  {
+                return null;
+            }
+        }
+        return null;
+    }
+};
+const uploadSingleImage = async (file)=>{
+    const form = new FormData();
+    form.append("image", file);
+    const result = await http("/upload/single", {
+        method: "POST",
+        body: form
+    });
+    if (!result.url) return null;
+    return normalizeUploadedUrl(result.url);
+};
+// ==================== ФОРМАТТЕРЫ URL ====================
 const toPublicProductImageUrl = (value)=>{
     if (typeof value !== "string") return null;
     const raw = value.trim();
@@ -259,22 +281,25 @@ const toPublicCategoryImageUrl = (value)=>{
         return `${API_URL}/uploads/categories/${raw}`;
     }
 };
-const extractSingleFile = (value)=>{
-    if (!value) return undefined;
-    if (value instanceof File) return value;
-    if (Array.isArray(value) && value.length > 0) {
-        const first = value[0];
-        if (first instanceof File) return first;
-        if (first && typeof first === "object") {
-            return first.rawFile;
-        }
-        return undefined;
+// ==================== ПОСТРОЕНИЕ FORM DATA ====================
+const buildProductFormData = (data)=>{
+    const form = new FormData();
+    appendIfDefined(form, "title", data.title);
+    appendIfDefined(form, "slug", data.slug);
+    appendIfDefined(form, "description", data.description);
+    appendIfDefined(form, "price", toNumber(data.price));
+    appendIfDefined(form, "discontPrice", toNumber(data.discontPrice));
+    appendIfDefined(form, "stock", toNumber(data.stock));
+    appendIfDefined(form, "categoryId", toNumber(data.categoryId));
+    const imageField = data.image;
+    const firstImage = Array.isArray(imageField) ? imageField[0] : imageField;
+    const rawFile = firstImage instanceof File ? firstImage : typeof firstImage === "object" && firstImage ? firstImage.rawFile : undefined;
+    if (rawFile) {
+        form.append("image", rawFile);
     }
-    if (typeof value === "object") {
-        return value.rawFile;
-    }
-    return undefined;
+    return form;
 };
+// ==================== ЗАГРУЗКА ИЗОБРАЖЕНИЙ ====================
 const resolveCategoryImageUrl = async (imageValue)=>{
     const file = extractSingleFile(imageValue);
     if (file) {
@@ -301,16 +326,6 @@ const resolveCategoryImageUrl = async (imageValue)=>{
     }
     return undefined;
 };
-const uploadSingleImage = async (file)=>{
-    const form = new FormData();
-    form.append("image", file);
-    const result = await http("/upload/single", {
-        method: "POST",
-        body: form
-    });
-    if (!result.url) return null;
-    return normalizeUploadedUrl(result.url);
-};
 const attachGalleryImages = async (productId, files)=>{
     if (files.length === 0) return;
     for(let index = 0; index < files.length; index += 1){
@@ -328,44 +343,41 @@ const attachGalleryImages = async (productId, files)=>{
         });
     }
 };
-const normalizeUploadedUrl = (raw)=>{
-    const value = raw.trim();
-    if (!value) return null;
-    const toValidatorFriendlyUrl = (urlValue)=>{
-        try {
-            const parsed = new URL(urlValue);
-            if (parsed.hostname === "localhost") {
-                parsed.hostname = "127.0.0.1";
-            }
-            return parsed.toString();
-        } catch  {
-            return null;
-        }
+// ==================== НОРМАЛИЗАЦИЯ ДАННЫХ ====================
+const normalizeUser = (user)=>{
+    const roles = Array.isArray(user.roles) ? user.roles.map((r)=>String(r)) : [];
+    return {
+        ...user,
+        roles,
+        rolesText: roles.join(", ")
     };
-    try {
-        return toValidatorFriendlyUrl(value);
-    } catch  {
-    // continue with normalization
-    }
-    if (value.startsWith("//")) {
-        return toValidatorFriendlyUrl(`http:${value}`);
-    }
-    if (value.startsWith("/")) {
-        return toValidatorFriendlyUrl(new URL(value, API_URL).toString());
-    }
-    if (value.startsWith(":")) {
-        try {
-            const api = new URL(API_URL);
-            return toValidatorFriendlyUrl(new URL(`${api.protocol}//${api.hostname}${value}`).toString());
-        } catch  {
-            return null;
-        }
-    }
-    if (value.startsWith("localhost:") || value.startsWith("127.0.0.1:")) {
-        return toValidatorFriendlyUrl(`http://${value}`);
-    }
-    return null;
 };
+const normalizeProduct = (data)=>{
+    const imageUrl = toPublicProductImageUrl(data.image);
+    return {
+        ...data,
+        image: imageUrl ? [
+            {
+                src: imageUrl,
+                title: String(data.title ?? "")
+            }
+        ] : [],
+        categoryId: data.categoryId ?? data.category?.id ?? undefined
+    };
+};
+const normalizeCategory = (data)=>{
+    const imageUrl = toPublicCategoryImageUrl(data.image);
+    return {
+        ...data,
+        image: imageUrl ? [
+            {
+                src: imageUrl,
+                title: String(data.title ?? "")
+            }
+        ] : []
+    };
+};
+// ==================== HTTP КЛИЕНТ ====================
 const http = async (path, options = {})=>{
     const token = __TURBOPACK__imported__module__$5b$project$5d2f$admin_react$2f$lib$2f$authStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["authStore"].getToken();
     const headers = {
@@ -411,264 +423,260 @@ const http = async (path, options = {})=>{
     if (response.status === 204) return null;
     return response.json();
 };
+// ==================== DATA PROVIDER ====================
 const rawDataProvider = {
+    // ===== GET LIST =====
     getList: async (resource, params)=>{
-        if (resource === "products") {
-            const page = params.pagination?.page ?? 1;
-            const perPage = params.pagination?.perPage ?? 10;
-            const all = await http("/products/all");
-            const start = (page - 1) * perPage;
-            const end = start + perPage;
-            return {
-                data: all.slice(start, end),
-                total: all.length
-            };
+        const page = params.pagination?.page ?? 1;
+        const perPage = params.pagination?.perPage ?? 10;
+        const start = (page - 1) * perPage;
+        const end = start + perPage;
+        switch(resource){
+            case "products":
+                {
+                    const all = await http("/products/all");
+                    return {
+                        data: all.slice(start, end),
+                        total: all.length
+                    };
+                }
+            case "categories":
+                {
+                    const data = await http("/categories/all");
+                    return {
+                        data,
+                        total: data.length
+                    };
+                }
+            case "users":
+                {
+                    const data = await http("/users");
+                    const mapped = data.map(normalizeUser);
+                    return {
+                        data: mapped.slice(start, end),
+                        total: mapped.length
+                    };
+                }
+            case "orders":
+                {
+                    const data = await http("/orders");
+                    return {
+                        data: data.slice(start, end),
+                        total: data.length
+                    };
+                }
+            default:
+                throw new Error(`Unsupported resource: ${resource}`);
         }
-        if (resource === "categories") {
-            const data = await http("/categories/all");
-            return {
-                data,
-                total: data.length
-            };
-        }
-        if (resource === "users") {
-            const data = await http("/users");
-            const mapped = data.map(normalizeUser);
-            const page = params.pagination?.page ?? 1;
-            const perPage = params.pagination?.perPage ?? 10;
-            const start = (page - 1) * perPage;
-            const end = start + perPage;
-            return {
-                data: mapped.slice(start, end),
-                total: mapped.length
-            };
-        }
-        if (resource === "orders") {
-            const data = await http("/orders");
-            const page = params.pagination?.page ?? 1;
-            const perPage = params.pagination?.perPage ?? 10;
-            const start = (page - 1) * perPage;
-            const end = start + perPage;
-            return {
-                data: data.slice(start, end),
-                total: data.length
-            };
-        }
-        throw new Error(`Unsupported resource: ${resource}`);
     },
+    // ===== GET ONE =====
     getOne: async (resource, params)=>{
-        if (resource === "products") {
-            const data = await http(`/products/${params.id}`);
-            const imageUrl = toPublicProductImageUrl(data.image);
-            return {
-                data: {
-                    ...data,
-                    image: imageUrl ? [
-                        {
-                            src: imageUrl,
-                            title: String(data.title ?? "")
-                        }
-                    ] : [],
-                    categoryId: data.categoryId ?? data.category?.id ?? undefined
+        switch(resource){
+            case "products":
+                {
+                    const data = await http(`/products/${params.id}`);
+                    return {
+                        data: normalizeProduct(data)
+                    };
                 }
-            };
-        }
-        if (resource === "categories") {
-            const data = await http(`/categories/${params.id}`);
-            const category = data.category ?? data;
-            const imageUrl = toPublicCategoryImageUrl(category.image);
-            return {
-                data: {
-                    ...category,
-                    image: imageUrl ? [
-                        {
-                            src: imageUrl,
-                            title: String(category.title ?? "")
-                        }
-                    ] : []
+            case "categories":
+                {
+                    const data = await http(`/categories/${params.id}`);
+                    const category = data.category ?? data;
+                    return {
+                        data: normalizeCategory(category)
+                    };
                 }
-            };
+            case "users":
+                {
+                    const data = await http(`/users/${params.id}`);
+                    return {
+                        data: normalizeUser(data)
+                    };
+                }
+            case "orders":
+                {
+                    const data = await http(`/orders/${params.id}`);
+                    return {
+                        data
+                    };
+                }
+            default:
+                throw new Error(`Unsupported resource: ${resource}`);
         }
-        if (resource === "users") {
-            const data = await http(`/users/${params.id}`);
-            return {
-                data: normalizeUser(data)
-            };
-        }
-        if (resource === "orders") {
-            const data = await http(`/orders/${params.id}`);
-            return {
-                data
-            };
-        }
-        throw new Error(`Unsupported resource: ${resource}`);
     },
+    // ===== GET MANY =====
     getMany: async (resource, params)=>{
-        if (resource === "categories") {
-            const data = await http("/categories/all");
-            const ids = new Set((params.ids ?? []).map((id)=>Number(id)));
-            return {
-                data: data.filter((item)=>ids.has(Number(item.id)))
-            };
+        const ids = new Set((params.ids ?? []).map((id)=>Number(id)));
+        switch(resource){
+            case "categories":
+                {
+                    const data = await http("/categories/all");
+                    return {
+                        data: data.filter((item)=>ids.has(Number(item.id)))
+                    };
+                }
+            case "users":
+                {
+                    const data = await http("/users");
+                    return {
+                        data: data.filter((item)=>ids.has(Number(item.id))).map(normalizeUser)
+                    };
+                }
+            default:
+                return {
+                    data: []
+                };
         }
-        if (resource === "users") {
-            const data = await http("/users");
-            const ids = new Set((params.ids ?? []).map((id)=>Number(id)));
-            return {
-                data: data.filter((item)=>ids.has(Number(item.id))).map(normalizeUser)
-            };
-        }
-        return {
-            data: []
-        };
     },
     getManyReference: async ()=>({
             data: [],
             total: 0
         }),
+    // ===== CREATE =====
+    // ===== CREATE =====
     create: async (resource, params)=>{
-        if (resource === "products") {
-            const product = await http("/products", {
-                method: "POST",
-                body: buildProductFormData(params.data)
-            });
-            const galleryFiles = extractFiles(params.data.gallery);
-            const productId = Number(product.id);
-            await attachGalleryImages(productId, galleryFiles);
-            return {
-                data: product
-            };
-        }
-        if (resource === "categories") {
-            const imageUrl = await resolveCategoryImageUrl(params.data.image);
-            const payload = {
-                ...params.data
-            };
-            delete payload.image;
-            if (imageUrl) {
-                payload.image = imageUrl;
+        // Для не-product ресурсов
+        if (resource !== "products") {
+            switch(resource){
+                case "categories":
+                    {
+                        const imageUrl = await resolveCategoryImageUrl(params.data.image);
+                        const payload = {
+                            ...params.data
+                        };
+                        delete payload.image;
+                        if (imageUrl) {
+                            payload.image = imageUrl;
+                        }
+                        const data = await http("/categories", {
+                            method: "POST",
+                            body: JSON.stringify(payload)
+                        });
+                        return {
+                            data
+                        };
+                    }
+                case "users":
+                    {
+                        const data = await http("/users", {
+                            method: "POST",
+                            body: JSON.stringify(params.data)
+                        });
+                        return {
+                            data: normalizeUser(data)
+                        };
+                    }
+                default:
+                    throw new Error(`Unsupported resource: ${resource}`);
             }
-            const data = await http("/categories", {
-                method: "POST",
-                body: JSON.stringify(payload)
-            });
-            return {
-                data
-            };
         }
-        if (resource === "users") {
-            const data = await http("/users", {
-                method: "POST",
-                body: JSON.stringify(params.data)
-            });
-            return {
-                data: normalizeUser(data)
-            };
-        }
-        throw new Error(`Unsupported resource: ${resource}`);
+        // ✅ products: без ретраев и без Date.now()
+        const product = await http("/products", {
+            method: "POST",
+            body: buildProductFormData(params.data)
+        });
+        const galleryFiles = extractFiles(params.data.gallery);
+        const productId = Number(product.id);
+        await attachGalleryImages(productId, galleryFiles);
+        return {
+            data: product
+        };
     },
+    // ===== UPDATE =====
     update: async (resource, params)=>{
-        if (resource === "products") {
-            const product = await http(`/products/${params.id}`, {
-                method: "PATCH",
-                body: buildProductFormData(params.data)
-            });
-            const galleryFiles = extractFiles(params.data.gallery);
-            const productId = Number(params.id);
-            await attachGalleryImages(productId, galleryFiles);
-            return {
-                data: product
-            };
-        }
-        if (resource === "categories") {
-            const imageUrl = await resolveCategoryImageUrl(params.data.image);
-            const payload = {
-                ...params.data
-            };
-            delete payload.image;
-            if (imageUrl) {
-                payload.image = imageUrl;
+        // Для не-product ресурсов
+        if (resource !== "products") {
+            switch(resource){
+                case "categories":
+                    {
+                        const imageUrl = await resolveCategoryImageUrl(params.data.image);
+                        const payload = {
+                            ...params.data
+                        };
+                        delete payload.image;
+                        if (imageUrl) {
+                            payload.image = imageUrl;
+                        }
+                        const data = await http(`/categories/${params.id}`, {
+                            method: "PATCH",
+                            body: JSON.stringify(payload)
+                        });
+                        return {
+                            data
+                        };
+                    }
+                case "users":
+                    {
+                        const payload = {
+                            ...params.data
+                        };
+                        if (!payload.password) {
+                            delete payload.password;
+                        }
+                        const data = await http(`/users/${params.id}`, {
+                            method: "PATCH",
+                            body: JSON.stringify(payload)
+                        });
+                        return {
+                            data: normalizeUser(data)
+                        };
+                    }
+                case "orders":
+                    {
+                        const nextStatus = String(params.data.status ?? "");
+                        if (nextStatus === "processing") {
+                            const data = await http(`/orders/${params.id}/confirm`, {
+                                method: "PATCH"
+                            });
+                            return {
+                                data
+                            };
+                        }
+                        if (nextStatus === "cancelled") {
+                            const data = await http(`/orders/${params.id}/cancel`, {
+                                method: "PATCH"
+                            });
+                            return {
+                                data
+                            };
+                        }
+                        throw new Error("Unsupported order status transition");
+                    }
+                default:
+                    throw new Error(`Unsupported resource: ${resource}`);
             }
-            const data = await http(`/categories/${params.id}`, {
-                method: "PATCH",
-                body: JSON.stringify(payload)
-            });
-            return {
-                data
-            };
         }
-        if (resource === "users") {
-            const payload = {
-                ...params.data
-            };
-            if (!payload.password) {
-                delete payload.password;
-            }
-            const data = await http(`/users/${params.id}`, {
-                method: "PATCH",
-                body: JSON.stringify(payload)
-            });
-            return {
-                data: normalizeUser(data)
-            };
-        }
-        if (resource === "orders") {
-            const nextStatus = String(params.data.status ?? "");
-            if (nextStatus === "processing") {
-                const data = await http(`/orders/${params.id}/confirm`, {
-                    method: "PATCH"
-                });
-                return {
-                    data
-                };
-            }
-            if (nextStatus === "cancelled") {
-                const data = await http(`/orders/${params.id}/cancel`, {
-                    method: "PATCH"
-                });
-                return {
-                    data
-                };
-            }
-            throw new Error("Unsupported order status transition");
-        }
-        throw new Error(`Unsupported resource: ${resource}`);
+        // ✅ products: без проверки slug и без Date.now()
+        const product = await http(`/products/${params.id}`, {
+            method: "PATCH",
+            body: buildProductFormData(params.data)
+        });
+        const galleryFiles = extractFiles(params.data.gallery);
+        await attachGalleryImages(Number(params.id), galleryFiles);
+        return {
+            data: product
+        };
     },
-    updateMany: async ()=>({
-            data: []
-        }),
+    // ===== DELETE =====
     delete: async (resource, params)=>{
-        if (resource === "products") {
-            await http(`/products/${params.id}`, {
-                method: "DELETE"
-            });
-            return {
-                data: params.previousData ?? {
-                    id: params.id
+        switch(resource){
+            case "products":
+            case "categories":
+            case "users":
+                {
+                    await http(`/${resource}/${params.id}`, {
+                        method: "DELETE"
+                    });
+                    return {
+                        data: params.previousData ?? {
+                            id: params.id
+                        }
+                    };
                 }
-            };
+            default:
+                throw new Error(`Unsupported resource: ${resource}`);
         }
-        if (resource === "categories") {
-            await http(`/categories/${params.id}`, {
-                method: "DELETE"
-            });
-            return {
-                data: params.previousData ?? {
-                    id: params.id
-                }
-            };
-        }
-        if (resource === "users") {
-            await http(`/users/${params.id}`, {
-                method: "DELETE"
-            });
-            return {
-                data: params.previousData ?? {
-                    id: params.id
-                }
-            };
-        }
-        throw new Error(`Unsupported resource: ${resource}`);
     },
     deleteMany: async ()=>({
             data: []
@@ -718,15 +726,77 @@ const messages = {
     "resources.products.name": "Товар |||| Товары",
     "resources.categories.name": "Категория |||| Категории",
     "resources.orders.name": "Заказ |||| Заказы",
-    "resources.users.name": "Пользователь |||| Пользователи"
+    "resources.users.name": "Пользователь |||| Пользователи",
+    "resources.users.page.list": "Пользователи",
+    "resources.products.page.list": "Товары",
+    "resources.categories.page.list": "Категории",
+    "resources.orders.page.list": "Заказы",
+    "ra.navigation.page_range_info": "%{offsetBegin}-%{offsetEnd} из %{total}",
+    "resources.users.action.create": "Создать пользователя",
+    "resources.products.action.create": "Создать товар",
+    "resources.categories.action.create": "Создать категорию",
+    "resources.orders.action.create": "Создать заказ",
+    "ra.action.bulk_actions": "1 выбран |||| %{smart_count} выбрано",
+    "ra.message.bulk_delete_content": "Вы уверены, что хотите удалить %{name}?",
+    "resources.products.notifications.updated": "Товар обновлен",
+    "ra.action.undo": "Отменить",
+    "resources.products.notifications.deleted": "Товар удален",
+    "resources.products.notifications.created": "Товар создан",
+    "resources.categories.notifications.updated": "Категория обновлена",
+    "resources.categories.notifications.deleted": "Категория удалена",
+    "resources.categories.notifications.created": "Категория создана",
+    "resources.orders.notifications.updated": "Заказ обновлен",
+    "resources.orders.notifications.deleted": "Заказ удален",
+    "resources.orders.notifications.created": "Заказ создан",
+    "resources.users.notifications.updated": "Пользователь обновлен",
+    "resources.users.notifications.deleted": "Пользователь удален",
+    "resources.users.notifications.created": "Пользователь создан",
+    "ra.validation.required": "Обязательное поле",
+    "ra.validation.minLength": "Минимальная длина %{min}",
+    "ra.validation.maxLength": "Максимальная длина %{max}",
+    "ra.validation.minValue": "Минимальное значение %{min}",
+    "ra.validation.maxValue": "Максимальное значение %{max}",
+    "ra.validation.email": "Неверный формат электронной почты",
+    "ra.input.image.upload_single": "Нажмите для загрузки изображения",
+    "ra.input.image.upload_several": "Нажмите для загрузки изображений",
+    "ra.input.image.remove": "Удалить",
+    "ra.input.image.download": "Скачать",
+    "ra.input.image.error": "Ошибка загрузки",
+    "ra.input.image.invalid": "Неверный файл",
+    "ra.input.image.max_size": "Макс. размер %{max} КБ",
+    "ra.input.image.min_size": "Мин. размер %{min} КБ",
+    "ra.input.image.accept": "Допустимые форматы: %{accept}",
+    "ra.input.image.placeholder": "Перетащите изображение сюда или нажмите для выбора",
+    "ra.input.image.hint": "Поддерживаемые форматы: %{accept}. Максимальный размер: %{max} КБ.",
+    "ra.input.image.error_size": "Размер файла превышает %{max} КБ",
+    "ra.input.image.error_format": "Недопустимый формат файла. Допустимые форматы: %{accept}",
+    "ra.notification.item_doesnt_exist": "Элемент не существует"
 };
 const i18nProvider = {
     translate: (key, options)=>{
-        const message = messages[key] ?? key;
+        // Отладка - удалите после проверки
+        if (key.includes('bulk') || options?.smart_count !== undefined) {
+            console.log(`🔑 Key: ${key}`, {
+                hasMessage: !!messages[key],
+                smartCount: options?.smart_count,
+                options
+            });
+        }
+        let message = messages[key] ?? key;
         const smartCount = options?.smart_count;
+        // Обработка множественного числа
         if (typeof smartCount === "number" && message.includes("||||")) {
             const [single, plural] = message.split("||||").map((part)=>part.trim());
-            return smartCount > 1 ? plural : single;
+            message = smartCount > 1 ? plural : single;
+        }
+        // Обработка переменных
+        if (options) {
+            message = message.replace(/%{(\w+)}/g, (_, varName)=>{
+                if (varName === 'smart_count' && smartCount !== undefined) {
+                    return String(smartCount);
+                }
+                return options[varName] !== undefined ? String(options[varName]) : `%{${varName}}`;
+            });
         }
         return message;
     },

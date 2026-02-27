@@ -44,6 +44,7 @@ let Product = class Product {
     generateSlug() {
         return this.title
             .toLowerCase()
+            .replace(/[‐-‒–—−]/g, "-")
             .replace(/[^a-z0-9а-яё\s-]/g, "")
             .replace(/[\s-]+/g, "-")
             .replace(/^-+|-+$/g, "");
@@ -59,7 +60,7 @@ __decorate([
     __metadata("design:type", String)
 ], Product.prototype, "title", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ length: 255, unique: true }),
+    (0, typeorm_1.Column)({ length: 255 }),
     __metadata("design:type", String)
 ], Product.prototype, "slug", void 0);
 __decorate([
