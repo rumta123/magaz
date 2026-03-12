@@ -53,6 +53,20 @@ export class OrdersController {
     return this.ordersService.updateStatusByAdmin(id, OrderStatus.PROCESSING);
   }
 
+  @Patch(":id/ship")
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles("admin")
+  async ship(@Param("id", ParseIntPipe) id: number) {
+    return this.ordersService.updateStatusByAdmin(id, OrderStatus.SHIPPED);
+  }
+
+  @Patch(":id/deliver")
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles("admin")
+  async deliver(@Param("id", ParseIntPipe) id: number) {
+    return this.ordersService.updateStatusByAdmin(id, OrderStatus.DELIVERED);
+  }
+
   @Patch(":id/cancel")
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles("admin")

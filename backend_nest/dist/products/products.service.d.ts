@@ -39,6 +39,7 @@ export declare class ProductsService {
     remove(id: number): Promise<{
         message: string;
     }>;
+    restore(id: number): Promise<Product>;
     findByCategory(categoryId: number): Promise<Product[]>;
     updateStock(productId: number, quantity: number): Promise<Product>;
 }

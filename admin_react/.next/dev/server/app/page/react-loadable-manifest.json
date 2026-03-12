@@ -1,19 +1,21 @@
 {
-  "[project]/admin_react/components/AdminPanel.tsx [app-client] (ecmascript, next/dynamic entry)": {
-    "id": "[project]/admin_react/components/AdminPanel.tsx [app-client] (ecmascript, next/dynamic entry)",
+  "[project]/shop_r/react_shop/magaz/admin_react/components/AdminPanel.tsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/shop_r/react_shop/magaz/admin_react/components/AdminPanel.tsx [app-client] (ecmascript, next/dynamic entry)",
     "files": [
-      "static/chunks/admin_react_be05e5c6._.js",
-      "static/chunks/7ffdb_ra-core_dist_e3ae671a._.js",
-      "static/chunks/7ffdb_@tanstack_query-core_build_modern_8ac064a8._.js",
-      "static/chunks/7ffdb_react-router_dist_development_8d899d67._.js",
-      "static/chunks/7ffdb_lodash_c36a35e0._.js",
-      "static/chunks/7ffdb_@mui_system_esm_e029ec66._.js",
-      "static/chunks/7ffdb_@mui_material_esm_styles_31a59538._.js",
-      "static/chunks/7ffdb_@mui_material_esm_5680fabf._.js",
-      "static/chunks/7ffdb_@popperjs_core_lib_4938a123._.js",
-      "static/chunks/3e0bc_ra-ui-materialui_dist_c910a9b9._.js",
-      "static/chunks/7ffdb_e2c4eb54._.js",
-      "static/chunks/admin_react_components_AdminPanel_tsx_57c39059._.js"
+      "static/chunks/shop_r_react_shop_magaz_admin_react_acf33f48._.js",
+      "static/chunks/06d4e_next_b2907f15._.js",
+      "static/chunks/06d4e_ra-core_dist_8a96247f._.js",
+      "static/chunks/06d4e_@tanstack_query-core_build_modern_f513d23d._.js",
+      "static/chunks/06d4e_react-router_dist_development_0c05a13e._.js",
+      "static/chunks/06d4e_lodash_874eac46._.js",
+      "static/chunks/06d4e_@mui_system_esm_415d2477._.js",
+      "static/chunks/06d4e_@mui_material_esm_styles_a05e2ba8._.js",
+      "static/chunks/06d4e_@mui_material_esm_Autocomplete_ae7b55c0._.js",
+      "static/chunks/06d4e_@mui_material_esm_31ca6176._.js",
+      "static/chunks/06d4e_@popperjs_core_lib_23970b8c._.js",
+      "static/chunks/b0ff4_ra-ui-materialui_dist_e157506f._.js",
+      "static/chunks/06d4e_d2fb6db8._.js",
+      "static/chunks/shop_r_react_shop_magaz_admin_react_components_AdminPanel_tsx_8638107c._.js"
     ]
   }
 }

@@ -72,6 +72,9 @@ let ProductsController = class ProductsController {
     async remove(id) {
         return this.productsService.remove(id);
     }
+    async restore(id) {
+        return this.productsService.restore(id);
+    }
     async updateStock(id, quantity) {
         return this.productsService.updateStock(id, quantity);
     }
@@ -176,6 +179,13 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], ProductsController.prototype, "remove", null);
+__decorate([
+    (0, common_1.Patch)(":id/restore"),
+    __param(0, (0, common_1.Param)("id", common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], ProductsController.prototype, "restore", null);
 __decorate([
     (0, common_1.Patch)(":id/stock"),
     __param(0, (0, common_1.Param)("id", common_1.ParseIntPipe)),

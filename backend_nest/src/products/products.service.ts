@@ -355,14 +355,25 @@ export class ProductsService {
       throw new NotFoundException(`Товар с ID ${id} не найден`);
     }
 
-    if (product.image) {
-      await this.deleteFile(product.image);
-    }
-
     product.isActive = false;
     await this.productRepo.save(product);
 
     return { message: "Товар успешно удален" };
+  }
+
+  async restore(id: number): Promise<Product> {
+    const product = await this.productRepo.findOne({
+      where: { id },
+      relations: ["category", "images"],
+    });
+    if (!product) {
+      throw new NotFoundException(`РўРѕРІР°СЂ СЃ ID ${id} РЅРµ РЅР°Р№РґРµРЅ`);
+    }
+
+    product.isActive = true;
+    await this.productRepo.save(product);
+
+    return product;
   }
 
   async findByCategory(categoryId: number) {

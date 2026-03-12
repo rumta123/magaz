@@ -280,12 +280,21 @@ let ProductsService = class ProductsService {
         if (!product) {
             throw new common_1.NotFoundException(`Товар с ID ${id} не найден`);
         }
-        if (product.image) {
-            await this.deleteFile(product.image);
-        }
         product.isActive = false;
         await this.productRepo.save(product);
         return { message: "Товар успешно удален" };
+    }
+    async restore(id) {
+        const product = await this.productRepo.findOne({
+            where: { id },
+            relations: ["category", "images"],
+        });
+        if (!product) {
+            throw new common_1.NotFoundException(`РўРѕРІР°СЂ СЃ ID ${id} РЅРµ РЅР°Р№РґРµРЅ`);
+        }
+        product.isActive = true;
+        await this.productRepo.save(product);
+        return product;
     }
     async findByCategory(categoryId) {
         return this.productRepo.find({

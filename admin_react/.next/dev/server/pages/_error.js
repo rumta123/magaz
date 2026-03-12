@@ -1,8 +1,8 @@
 var R=require("../chunks/ssr/[turbopack]_runtime.js")("server/pages/_error.js")
-R.c("server/chunks/ssr/7ffdb_f3fa94d0._.js")
+R.c("server/chunks/ssr/06d4e_96eff1db._.js")
 R.c("server/chunks/ssr/[externals]_next_dist_shared_lib_no-fallback-error_external_59b92b38.js")
-R.c("server/chunks/ssr/7ffdb_76149d90._.js")
+R.c("server/chunks/ssr/06d4e_84ee2d7a._.js")
 R.c("server/chunks/ssr/[externals]__e6a4d965._.js")
-R.c("server/chunks/ssr/7ffdb_next_260b4aac._.js")
-R.m("[project]/admin_react/node_modules/next/dist/esm/build/templates/pages.js { INNER_PAGE => \"[project]/admin_react/node_modules/next/error.js [ssr] (ecmascript)\", INNER_DOCUMENT => \"[project]/admin_react/node_modules/next/document.js [ssr] (ecmascript)\", INNER_APP => \"[project]/admin_react/node_modules/next/app.js [ssr] (ecmascript)\" } [ssr] (ecmascript)")
-module.exports=R.m("[project]/admin_react/node_modules/next/dist/esm/build/templates/pages.js { INNER_PAGE => \"[project]/admin_react/node_modules/next/error.js [ssr] (ecmascript)\", INNER_DOCUMENT => \"[project]/admin_react/node_modules/next/document.js [ssr] (ecmascript)\", INNER_APP => \"[project]/admin_react/node_modules/next/app.js [ssr] (ecmascript)\" } [ssr] (ecmascript)").exports
+R.c("server/chunks/ssr/06d4e_next_5f4ab74c._.js")
+R.m("[project]/shop_r/react_shop/magaz/admin_react/node_modules/next/dist/esm/build/templates/pages.js { INNER_PAGE => \"[project]/shop_r/react_shop/magaz/admin_react/node_modules/next/error.js [ssr] (ecmascript)\", INNER_DOCUMENT => \"[project]/shop_r/react_shop/magaz/admin_react/node_modules/next/document.js [ssr] (ecmascript)\", INNER_APP => \"[project]/shop_r/react_shop/magaz/admin_react/node_modules/next/app.js [ssr] (ecmascript)\" } [ssr] (ecmascript)")
+module.exports=R.m("[project]/shop_r/react_shop/magaz/admin_react/node_modules/next/dist/esm/build/templates/pages.js { INNER_PAGE => \"[project]/shop_r/react_shop/magaz/admin_react/node_modules/next/error.js [ssr] (ecmascript)\", INNER_DOCUMENT => \"[project]/shop_r/react_shop/magaz/admin_react/node_modules/next/document.js [ssr] (ecmascript)\", INNER_APP => \"[project]/shop_r/react_shop/magaz/admin_react/node_modules/next/app.js [ssr] (ecmascript)\" } [ssr] (ecmascript)").exports

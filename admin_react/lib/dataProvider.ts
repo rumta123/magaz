@@ -227,9 +227,20 @@ const normalizeUser = (user: Record<string, unknown>) => {
 
 const normalizeProduct = (data: Record<string, unknown>) => {
   const imageUrl = toPublicProductImageUrl(data.image);
+  const images = Array.isArray(data.images)
+    ? data.images.map((item) => {
+        const image = item as Record<string, unknown>;
+        return {
+          ...image,
+          imageUrl: toPublicProductImageUrl(image.imageUrl) ?? String(image.imageUrl ?? ""),
+        };
+      })
+    : [];
+
   return {
     ...data,
     image: imageUrl ? [{ src: imageUrl, title: String(data.title ?? "") }] : [],
+    images,
     categoryId:
       (data.categoryId as number | string | undefined) ??
       (data.category as { id?: number | string } | undefined)?.id ??
@@ -529,6 +540,20 @@ const rawDataProvider = {
             return { data };
           }
 
+          if (nextStatus === "shipped") {
+            const data = (await http(`/orders/${params.id}/ship`, {
+              method: "PATCH",
+            })) as Record<string, unknown>;
+            return { data };
+          }
+
+          if (nextStatus === "delivered") {
+            const data = (await http(`/orders/${params.id}/deliver`, {
+              method: "PATCH",
+            })) as Record<string, unknown>;
+            return { data };
+          }
+
           if (nextStatus === "cancelled") {
             const data = (await http(`/orders/${params.id}/cancel`, {
               method: "PATCH",
@@ -545,6 +570,13 @@ const rawDataProvider = {
     }
 
     // ✅ products: без проверки slug и без Date.now()
+    if (params.data.restore === true) {
+      const restored = (await http(`/products/${params.id}/restore`, {
+        method: "PATCH",
+      })) as Record<string, unknown>;
+      return { data: restored };
+    }
+
     const product = (await http(`/products/${params.id}`, {
       method: "PATCH",
       body: buildProductFormData(params.data),
@@ -568,6 +600,11 @@ const rawDataProvider = {
       case "categories":
       case "users": {
         await http(`/${resource}/${params.id}`, { method: "DELETE" });
+        return { data: params.previousData ?? { id: params.id } };
+      }
+
+      case "product-images": {
+        await http(`/product-images/${params.id}`, { method: "DELETE" });
         return { data: params.previousData ?? { id: params.id } };
       }
 

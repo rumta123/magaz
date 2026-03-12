@@ -41,6 +41,12 @@ let OrdersController = class OrdersController {
     async confirm(id) {
         return this.ordersService.updateStatusByAdmin(id, order_entity_1.OrderStatus.PROCESSING);
     }
+    async ship(id) {
+        return this.ordersService.updateStatusByAdmin(id, order_entity_1.OrderStatus.SHIPPED);
+    }
+    async deliver(id) {
+        return this.ordersService.updateStatusByAdmin(id, order_entity_1.OrderStatus.DELIVERED);
+    }
     async cancel(id) {
         return this.ordersService.updateStatusByAdmin(id, order_entity_1.OrderStatus.CANCELLED);
     }
@@ -85,6 +91,24 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], OrdersController.prototype, "confirm", null);
+__decorate([
+    (0, common_1.Patch)(":id/ship"),
+    (0, common_1.UseGuards)(jwt_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
+    (0, roles_decorator_1.Roles)("admin"),
+    __param(0, (0, common_1.Param)("id", common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], OrdersController.prototype, "ship", null);
+__decorate([
+    (0, common_1.Patch)(":id/deliver"),
+    (0, common_1.UseGuards)(jwt_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
+    (0, roles_decorator_1.Roles)("admin"),
+    __param(0, (0, common_1.Param)("id", common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], OrdersController.prototype, "deliver", null);
 __decorate([
     (0, common_1.Patch)(":id/cancel"),
     (0, common_1.UseGuards)(jwt_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),

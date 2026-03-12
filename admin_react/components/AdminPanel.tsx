@@ -1,9 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 import {
   Admin,
-  ArrayField,
   BooleanField,
   Button,
   Create,
@@ -24,11 +24,11 @@ import {
   SelectArrayInput,
   SelectInput,
   SimpleForm,
-  SingleFieldList,
   TextField,
   TextInput,
   Title,
   required,
+  useDataProvider,
   useGetIdentity,
   useNotify,
   useRecordContext,
@@ -77,8 +77,9 @@ const TRANSLIT_MAP: Record<string, string> = {
 };
 
 const ORDER_STATUS_LABELS: Record<string, string> = {
-  pending: "Ожидает",
-  processing: "В обработке",
+  pending: "Новый",
+  processing: "Принят в работу",
+  shipped: "Отправлен",
   delivered: "Доставлен",
   cancelled: "Отменен",
 };
@@ -126,6 +127,39 @@ const AutoSlugSync = () => {
   return null;
 };
 
+const ProductRestoreButton = () => {
+  const record = useRecordContext<Record<string, unknown>>();
+  const [update, { isPending }] = useUpdate();
+  const notify = useNotify();
+  const refresh = useRefresh();
+
+  if (!record || record.isActive) return null;
+
+  const handleRestore = () => {
+    update(
+      "products",
+      {
+        id: record.id as number | string,
+        data: { restore: true },
+        previousData: record,
+      },
+      {
+        onSuccess: () => {
+          notify("Товар восстановлен", { type: "success" });
+          refresh();
+        },
+        onError: (error) => {
+          notify(error?.message || "Не удалось восстановить товар", {
+            type: "error",
+          });
+        },
+      },
+    );
+  };
+
+  return <Button label="Восстановить" onClick={handleRestore} disabled={isPending} />;
+};
+
 const ProductList = () => (
   <List>
     <Datagrid rowClick={false}>
@@ -137,6 +171,7 @@ const ProductList = () => (
       <BooleanField source="isActive" label="Активен" />
       <TextField source="slug" label="Слаг" />
       <EditButton label="Редактировать" />
+      <ProductRestoreButton />
       <DeleteButton label="Удалить" />
     </Datagrid>
   </List>
@@ -165,6 +200,89 @@ const ProductCreate = () => (
   </Create>
 );
 
+const ProductGalleryActions = (props: { record?: Record<string, unknown> }) => {
+  const record = useRecordContext<Record<string, unknown>>(props);
+  const provider = useDataProvider();
+  const notify = useNotify();
+  const refresh = useRefresh();
+
+  if (!record) return null;
+
+  const imageId = record.id as number | string | undefined;
+  const imageUrl = String(record.imageUrl ?? "");
+
+  if (!imageId || !imageUrl) return null;
+
+  const handleDelete = async () => {
+    try {
+      await provider.delete("product-images", {
+        id: imageId,
+        previousData: record,
+      });
+      notify("Фото галереи удалено", { type: "success" });
+      refresh();
+    } catch (error) {
+      notify(error instanceof Error ? error.message : "Не удалось удалить фото", {
+        type: "error",
+      });
+    }
+  };
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 12,
+        marginBottom: 12,
+        border: "1px solid #e5e7eb",
+        borderRadius: 8,
+        padding: 12,
+      }}
+    >
+      <Image
+        src={imageUrl}
+        alt={String(record.altText ?? "gallery")}
+        width={72}
+        height={72}
+        unoptimized
+        style={{ width: 72, height: 72, objectFit: "cover", borderRadius: 6 }}
+      />
+      <div style={{ flex: 1 }}>
+        <div style={{ fontSize: 12, color: "#6b7280" }}>ID: {String(imageId)}</div>
+        <div style={{ fontSize: 12, color: "#6b7280" }}>
+          {record.isPrimary ? "Главное фото" : "Дополнительное фото"}
+        </div>
+      </div>
+      <Button label="Удалить" onClick={handleDelete} />
+    </div>
+  );
+};
+
+const ProductGallerySection = () => {
+  const record = useRecordContext<Record<string, unknown>>();
+  const images = Array.isArray(record?.images)
+    ? (record.images as Array<Record<string, unknown>>)
+    : [];
+
+  if (images.length === 0) {
+    return (
+      <div style={{ marginTop: 8, marginBottom: 16, color: "#6b7280" }}>
+        Дополнительных фото пока нет
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ marginTop: 8, marginBottom: 16 }}>
+      <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 12 }}>Текущая галерея</div>
+      {images.map((image) => (
+        <ProductGalleryActions key={String(image.id ?? image.imageUrl ?? "")} record={image} />
+      ))}
+    </div>
+  );
+};
+
 const ProductEdit = () => (
   <Edit title="Редактировать товар">
     <SimpleForm>
@@ -182,11 +300,7 @@ const ProductEdit = () => (
       <ImageInput label="Главное изображение" source="image" accept={{ "image/*": [] }}>
         <ImageField source="src" title="title" />
       </ImageInput>
-      <ArrayField source="images" label="Текущая галерея">
-        <SingleFieldList>
-          <ImageField source="imageUrl" title="altText" />
-        </SingleFieldList>
-      </ArrayField>
+      <ProductGallerySection />
       <ImageInput label="Добавить в галерею" source="gallery" multiple accept={{ "image/*": [] }}>
         <ImageField source="src" title="title" />
       </ImageInput>
@@ -297,7 +411,9 @@ const OrderStatusActions = () => {
   const status = String(record.status ?? "");
   const id = record.id as number | string;
 
-  const updateStatus = (nextStatus: "processing" | "cancelled") => {
+  const updateStatus = (
+    nextStatus: "processing" | "shipped" | "delivered" | "cancelled",
+  ) => {
     update(
       "orders",
       {
@@ -320,16 +436,26 @@ const OrderStatusActions = () => {
   };
 
   return (
-    <div style={{ display: "flex", gap: 8 }}>
+    <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
       <Button
-        label="Подтвердить"
+        label="Принять в работу"
         onClick={() => updateStatus("processing")}
-        disabled={isPending || status === "cancelled" || status === "delivered"}
+        disabled={isPending || status !== "pending"}
+      />
+      <Button
+        label="Отправить"
+        onClick={() => updateStatus("shipped")}
+        disabled={isPending || status !== "processing"}
+      />
+      <Button
+        label="Доставлен"
+        onClick={() => updateStatus("delivered")}
+        disabled={isPending || status !== "shipped"}
       />
       <Button
         label="Отменить"
         onClick={() => updateStatus("cancelled")}
-        disabled={isPending || status === "cancelled"}
+        disabled={isPending || status === "cancelled" || status === "delivered"}
       />
     </div>
   );
@@ -389,7 +515,7 @@ const OrderList = () => (
                 const total = Number(item.total ?? 0);
                 return (
                   <div key={String(item.id ?? `${name}-${qty}-${total}`)}>
-                    {name} x{qty} @ {price} = {total}
+                    {name} x{qty} {price} = {total}
                   </div>
                 );
               })}

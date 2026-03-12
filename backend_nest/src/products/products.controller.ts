@@ -152,6 +152,11 @@ export class ProductsController {
   }
 
   // 🔹 ADMIN: Обновить остатки
+  @Patch(":id/restore")
+  async restore(@Param("id", ParseIntPipe) id: number) {
+    return this.productsService.restore(id);
+  }
+
   @Patch(":id/stock")
   async updateStock(
     @Param("id", ParseIntPipe) id: number,

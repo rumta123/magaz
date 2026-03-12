@@ -23,5 +23,6 @@ export declare class ProductsController {
     remove(id: number): Promise<{
         message: string;
     }>;
+    restore(id: number): Promise<import("./entities/product.entity").Product>;
     updateStock(id: number, quantity: number): Promise<import("./entities/product.entity").Product>;
 }

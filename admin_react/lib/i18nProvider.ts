@@ -78,6 +78,11 @@ const messages: Record<string, string> = {
   "ra.input.image.error_size": "Размер файла превышает %{max} КБ",
   "ra.input.image.error_format": "Недопустимый формат файла. Допустимые форматы: %{accept}",
   "ra.notification.item_doesnt_exist": "Элемент не существует",
+  "resources.products.action.delete": "Удалить товар",
+  "resources.categories.action.delete": "Удалить категорию",
+  "resources.orders.action.delete": "Удалить заказ",
+  "resources.users.action.delete": "Удалить пользователя",
+  "ra.action.toggle_theme": "Переключить тему",
 };
 
 export const i18nProvider: I18nProvider = {
